@@ -120,7 +120,7 @@ dim(reducedDim(sce_pbmc_final, "TSNE"))
 ##### UMAP
 set.seed(1000000)
 sce_pbmc_final <- runUMAP(sce_pbmc_final, dimred = "PCA")
-dim(reducedDim(sce_pbmc_final, "TSNE"))
+dim(reducedDim(sce_pbmc_final, "UMAP"))
 # [1] 3985    2
 
 sce_pbmc_final
