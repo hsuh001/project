@@ -72,7 +72,7 @@ counts(sce)
 # 4、初始assays只有原始表达矩阵，可以多向扩展，也有两种方式：
 # ① 使用一些R包的标准函数扩展，如扩展到归一化矩阵
 sce <- scran::computeSumFactors(sce)
-sce <- scater::normalize(sce)
+sce <- scater::logNormCounts(sce)
 
 # > sce
 ## class: SingleCellExperiment
