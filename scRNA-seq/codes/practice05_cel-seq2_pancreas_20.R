@@ -95,7 +95,7 @@ sum(duplicated(gene_ids))
 # [1] 2589
 
 sce_grun_filtered <- sce_grun[keep_row, ]
-rownames(sce_grun) <- gene_ids[keep_row]
+rownames(sce_grun_filtered) <- gene_ids[keep_row]
 dim(sce_grun_filtered)
 # [1] 17474  1728
 
