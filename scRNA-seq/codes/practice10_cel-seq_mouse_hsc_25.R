@@ -51,6 +51,9 @@ sum(is.na(anno$SYMBOL))
 sum(is.na(anno$SEQNAME))
 # [1] 0
 
+# 接下来只需要匹配顺序即可
+rowData(sce_grun_hsc) <- anno[match(rownames(sce_grun_hsc), anno$GENEID),]
+
 
 # qc --------------------------------------------------------------------------
 # 没有线粒体
@@ -188,7 +191,7 @@ markers_grun_hsc <- findMarkers(
     groups = colLabels(sce_grun_hsc_filtered),
     test.type = "wilcox",
     direction = "up",
-    row.data = rowData(sce_grun_hsc_filtered)[, "symbol", drop = FALSE]
+    row.data = rowData(sce_grun_hsc_filtered)[, "SYMBOL", drop = FALSE]
 )
 
 # use cluster 2 as an explaination
@@ -196,12 +199,12 @@ chosen_cluster <- "2"
 markers_cluster_2 <- markers_grun_hsc[[chosen_cluster]]
 # cluster 1的top 10
 interest_markers <- markers_cluster_2[markers_cluster_2$Top <= 10, ]
-head(markers_cluster_1, 10)
+length(interest_markers)
 # [1] 16
 
 # 提取cluster 2与其他clusters对比的AUC结果
 aucs <- getMarkerEffects(interest_markers, prefix = "AUC")
-rownames(aucs) <- interest_markers$symbol
+rownames(aucs) <- interest_markers$SYMBOL
 
 library(pheatmap)
 pheatmap(aucs, color = viridis::plasma(100))
